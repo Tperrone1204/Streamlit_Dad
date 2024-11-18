@@ -3,14 +3,13 @@ import numpy as np
 import pickle
 import pandas as pd
 
-# Load data and model
+
 df = pd.read_csv('obesity.csv')
 df.to_pickle('obesity.pkl')
 
 st.header("Obesity Predictor")
 st.write("Enter the info on health below")
 
-# Get user input
 Gender = st.radio("What gender are you?", ["Male", "Female"])
 Age = st.slider("How old are you?", 0, 100, 0, 1)
 Height = st.slider("How tall are you?", 0.00, 2.00, 0.00, 0.01)
@@ -30,11 +29,9 @@ Calc = st.radio("Calc", ["Sometimes", "Always", "Frequently"])
 MTRANS = st.radio("Mode of Transportation", [
                   "Public_Transportation", "Walking", "Automobile", "Moterbike", "Bike"])
 
-# Create input array
 ObesityLevel = np.array([[Gender, Age, Height, Weight,
                         family_history_with_overweight, FAVC, FCVC, NCP, CAEC, SMOKE, CH2O, SCC, FAF, TUE, Calc, MTRANS]])
 
-# Load model and predict
 with open('obesity.pkl', 'rb') as f:
     model = pickle.load(f)
 
